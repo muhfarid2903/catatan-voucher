@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
+  <title>Catatan Voucher</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app-belum-siap" class="pesan-setup hidden">
+    <h2>Belum dikonfigurasi</h2>
+    <p>Buka <code>app.js</code>, isi <code>SUPABASE_URL</code> dan <code>SUPABASE_ANON_KEY</code> dari dashboard Supabase Anda.</p>
+  </div>
+
+  <div id="app" class="hidden">
+    <div class="header">
+      <h1>Catatan Voucher</h1>
+      <span id="status-koneksi" class="status-koneksi" title="Status sinkronisasi"></span>
+    </div>
+
+    <div class="card">
+      <div class="ringkasan">
+        <div class="ringkasan-item">
+          <div class="label">Total Voucher Diambil</div>
+          <div class="nilai" id="total-voucher">0</div>
+        </div>
+        <div class="ringkasan-item">
+          <div class="label">Total Setoran</div>
+          <div class="nilai" id="total-setoran">Rp 0</div>
+        </div>
+        <div class="ringkasan-item alert">
+          <div class="label">Voucher Belum Dibayar</div>
+          <div class="nilai" id="voucher-belum">0</div>
+        </div>
+        <div class="ringkasan-item alert">
+          <div class="label">Sisa Piutang</div>
+          <div class="nilai" id="piutang">Rp 0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Tambah Pengambilan</h2>
+      <label for="input-tanggal">Tanggal Pengambilan</label>
+      <input type="date" id="input-tanggal">
+      <label for="input-jumlah">Jumlah Voucher</label>
+      <input type="number" id="input-jumlah" min="1" inputmode="numeric" placeholder="Contoh: 50">
+      <button class="primary" id="btn-tambah">+ Catat Pengambilan</button>
+    </div>
+
+    <div class="card">
+      <h2>Riwayat</h2>
+      <div id="daftar"><div class="loading">Memuat...</div></div>
+    </div>
+
+    <div class="footer">Setoran Rp 1.500 per voucher · Sinkron otomatis</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
