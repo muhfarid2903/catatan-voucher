@@ -16,8 +16,13 @@
   <div id="app" class="hidden">
     <div class="header">
       <h1>Catatan Voucher</h1>
-      <span id="status-koneksi" class="status-koneksi" title="Status sinkronisasi"></span>
+      <div class="header-kanan">
+        <button id="identitas" class="identitas" title="Nama Anda — dipakai di histori (opsional)">👤</button>
+        <span id="status-koneksi" class="status-koneksi" title="Status sinkronisasi"></span>
+      </div>
     </div>
+
+    <div class="alur" id="alur">warkopsaja → anci</div>
 
     <div class="card">
       <div class="ringkasan">
@@ -30,7 +35,7 @@
           <div class="nilai" id="total-setoran">Rp 0</div>
         </div>
         <div class="ringkasan-item alert">
-          <div class="label">Voucher Belum Dibayar</div>
+          <div class="label">Voucher Belum Disetor</div>
           <div class="nilai" id="voucher-belum">0</div>
         </div>
         <div class="ringkasan-item alert">
@@ -41,7 +46,7 @@
     </div>
 
     <div class="card">
-      <h2>Tambah Pengambilan</h2>
+      <h2 id="judul-tambah">Tambah Pengambilan</h2>
       <label for="input-tanggal">Tanggal Pengambilan</label>
       <input type="date" id="input-tanggal">
       <label for="input-jumlah">Jumlah Voucher</label>
@@ -53,6 +58,11 @@
       <h2>Riwayat</h2>
       <div id="daftar"><div class="loading">Memuat...</div></div>
     </div>
+
+    <details class="card">
+      <summary><h2>Histori Perubahan</h2></summary>
+      <div id="daftar-histori" class="daftar-histori"><div class="loading">Memuat...</div></div>
+    </details>
 
     <div class="footer">Setoran Rp 1.500 per voucher · Sinkron otomatis</div>
   </div>

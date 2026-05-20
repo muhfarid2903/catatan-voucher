@@ -39,15 +39,51 @@ body {
 
 h1 { font-size: 20px; }
 
+.header-kanan {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.identitas {
+  background: #eef2ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.identitas:active { background: #e0e7ff; }
+
 .status-koneksi {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: #d1d5db;
   transition: background 0.3s;
+  flex-shrink: 0;
 }
 .status-koneksi.tersambung { background: #10b981; }
 .status-koneksi.gagal { background: #ef4444; }
+
+.alur {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3730a3;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  padding: 6px 12px;
+  margin-bottom: 16px;
+}
 
 .card {
   background: white;
@@ -144,6 +180,7 @@ button.primary:disabled { opacity: 0.5; cursor: wait; }
   min-width: 0;
 }
 .item-tanggal { font-weight: 500; font-size: 15px; }
+.item-pihak { font-size: 13px; color: #374151; margin-top: 2px; }
 .item-detail { font-size: 13px; color: #6b7280; margin-top: 2px; }
 
 .item.dibayar .item-info { opacity: 0.5; }
@@ -181,6 +218,38 @@ button.primary:disabled { opacity: 0.5; cursor: wait; }
   color: #9ca3af;
   font-size: 14px;
 }
+
+/* ── <details> sebagai card yang bisa dilipat ── */
+details.card > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+details.card > summary::-webkit-details-marker { display: none; }
+details.card > summary h2 { margin-bottom: 0; }
+details.card > summary::after {
+  content: '▾';
+  color: #9ca3af;
+  font-size: 14px;
+}
+details.card[open] > summary::after { content: '▴'; }
+details.card[open] > summary { margin-bottom: 12px; }
+
+/* ── Histori perubahan ── */
+.daftar-histori { max-height: 360px; overflow-y: auto; }
+.histori-item {
+  padding: 10px 4px 10px 12px;
+  border-left: 3px solid #d1d5db;
+  border-bottom: 1px solid #f3f4f6;
+}
+.histori-item:last-child { border-bottom: none; }
+.histori-item.aksi-tambah { border-left-color: #10b981; }
+.histori-item.aksi-ubah   { border-left-color: #2563eb; }
+.histori-item.aksi-hapus  { border-left-color: #ef4444; }
+.histori-ket { font-size: 14px; }
+.histori-meta { font-size: 12px; color: #9ca3af; margin-top: 2px; }
 
 .footer {
   text-align: center;

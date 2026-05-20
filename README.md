@@ -1,7 +1,14 @@
 # Catatan Voucher
 
-Aplikasi web untuk mencatat pengambilan voucher titipan, dengan sinkronisasi
-otomatis antar HP/laptop.
+Aplikasi web untuk mencatat pengambilan voucher titipan — **jembatan antara
+warkopsaja dan anci**: warkopsaja drop voucher ke anci, anci jual lalu setor
+uang balik ke warkopsaja. Sinkron otomatis antar HP/laptop.
+
+Fitur:
+- **Pihak tetap** `warkopsaja → anci` (nama disetel di `app.js`, tidak perlu dipilih tiap input)
+- **Input simpel**: cukup tanggal + jumlah voucher; tiap baris otomatis menandai alur & setoran
+- **Histori perubahan**: tiap tambah/ubah/hapus tercatat dengan waktu & nama operator
+  (nama opsional, diisi sekali lewat tombol 👤 — tidak pernah nanya otomatis)
 
 - Frontend: HTML + CSS + JavaScript (statis, di-host di GitHub Pages)
 - Backend: Supabase (PostgreSQL + realtime)
@@ -23,6 +30,7 @@ Total waktu sekitar 15 menit. Lakukan urut dari atas ke bawah.
 3. Setelah project siap, di sidebar kiri klik ikon **SQL Editor** → **New query**.
 4. Buka file `supabase-setup.sql` dari repo ini, salin **semua isinya**, tempel di SQL Editor, klik **Run**.
    - Akan muncul "Success. No rows returned" — itu artinya berhasil.
+   - **Sudah pernah pakai versi lama?** File ini aman dijalankan ulang. Cukup tempel & Run lagi untuk menambah tabel suplier, dealer, histori, dan kolom baru — data lama tetap utuh.
 5. Ambil kunci API: sidebar kiri → **Project Settings** (ikon roda gigi) → **API**.
    - Salin nilai **Project URL** (contoh: `https://xxxxx.supabase.co`)
    - Salin nilai **anon public** key (string panjang yang dimulai `eyJ...`)
@@ -96,15 +104,16 @@ Supaya berasa seperti aplikasi:
 
 Bagikan URL ke pihak penitipan supaya mereka juga pasang.
 
-## Cara Pakai
-
-- **Tambah pengambilan**: pilih tanggal, isi jumlah voucher, tekan tombol catat
-- **Tandai sudah dibayar**: centang checkbox di kiri baris (otomatis dicoret)
-- **Hapus**: tekan tombol × di kanan baris
-- **Sinkron**: otomatis. Saat pihak penitipan menambah/mengubah catatan dari HP-nya, layar Anda update sendiri (asal browser tetap terbuka). Lampu hijau di pojok kanan atas = tersambung.
+- **(Opsional) Set nama operator**: tekan tombol 👤 di kanan atas, isi nama Anda. Nama ini muncul di histori. Boleh dikosongkan — tidak wajib, dan tidak akan nanya otomatis.
+- **Tambah pengambilan**: pilih tanggal, isi jumlah voucher (warkopsaja drop ke anci), tekan tombol catat.
+- **Tandai sudah disetor**: centang checkbox di kiri baris saat anci sudah setor ke warkopsaja (otomatis dicoret & diberi label Disetor).
+- **Hapus**: tekan tombol × di kanan baris.
+- **Histori perubahan**: buka panel **Histori Perubahan** untuk melihat semua aktivitas (apa, kapan, oleh siapa).
+- **Sinkron**: otomatis. Saat pihak lain menambah/mengubah catatan dari HP-nya, layar Anda update sendiri (asal browser tetap terbuka). Lampu hijau di pojok kanan atas = tersambung.
 
 ## Mengubah
 
+- **Nama pihak** (`warkopsaja` & `anci`): edit `SUPLIER` dan `DEALER` di `app.js`.
 - **Harga setoran** (default Rp 1.500): edit `HARGA_SETOR` di `app.js`.
 - **Tampilan/warna**: edit `style.css`.
 - **Setelah perubahan**: `git add . && git commit -m "update" && git push`. GitHub Pages otomatis deploy dalam 1-2 menit.
